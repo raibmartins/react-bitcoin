@@ -3,7 +3,6 @@ import { StatusBar, StyleSheet, Text, View, SafeAreaView, Platform } from 'react
 import CurrentPrice from './src/components/currentPrice';
 import HistoryGraphic from './src/components/historyGraphic';
 import QuotationList from './src/components/quotationList'
-import QuotationItem from './src/components/quotationList/quotationItem';
 
 
 function formatDate(number) {
@@ -16,9 +15,9 @@ function formatDate(number) {
 function url(days) {
   const data = new Date();
   const listLastDays = days;
-  const end_date = `${data.getFullYear()}-${formatDate(data.getMonth()+1)}-${formatDate(data.getDay())}`
+  const end_date = `${data.getFullYear()}-${formatDate(data.getMonth()+1)}-${formatDate(data.getDate())}`
   data.setDate(data.getDate() - listLastDays);
-  const start_date = `${data.getFullYear()}-${formatDate(data.getMonth()+1)}-${formatDate(data.getDay())}`
+  const start_date = `${data.getFullYear()}-${formatDate(data.getMonth()+1)}-${formatDate(data.getDate())}`
   return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${start_date}&end=${end_date}`;
 }
 
@@ -82,8 +81,7 @@ export default function App() {
       />
       <CurrentPrice></CurrentPrice>
       <HistoryGraphic></HistoryGraphic>
-      <QuotationList></QuotationList>
-      <QuotationItem></QuotationItem>
+      <QuotationList filterDay={updateDay} listTransactions={coinsList}></QuotationList>
     </SafeAreaView>
   );
 }
