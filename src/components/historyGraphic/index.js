@@ -32,7 +32,6 @@ export default function HistoryGraphic(props) {
                         stroke: '#f50d41'
                     }
                 }}
-                bezier
             />
         </View>
     )

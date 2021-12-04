@@ -35,6 +35,7 @@ export default function QuotationList(props) {
                     renderItem={({item}) => {
                         return <QuotationItem valor={item.valor} data={item.data}/>
                     }}
+                    keyExtractor={(item) => item.valor}
                 />
             </ScrollView>
         </Fragment>

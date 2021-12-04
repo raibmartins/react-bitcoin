@@ -14,7 +14,7 @@ export default function QuotationItem(props) {
                 </View>
             </View>
             <View style={styles.contextRigth}>
-                <Text style={styles.price}>{props.valor}</Text>
+                <Text style={styles.price}>${props.valor.toFixed(2)}</Text>
             </View>
         </View>
     )

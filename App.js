@@ -25,8 +25,10 @@ async function getListCoins(url) {
   let response = await fetch(url);
   let returnApi = await response.json();
   let selectListQuotation = returnApi.bpi;
+  var id = 0;
   const QUERY_COINS_LIST = Object.keys(selectListQuotation).map((key) => {
     return {
+      id: Math.random * 100,
       data: key.split("-").reverse().join("/"),
       valor: selectListQuotation[key]
     }
@@ -53,10 +55,16 @@ export default function App() {
   const [coinsGraphicList, setCoinGraphicList] = useState([0])
   const [days, setDays] = useState(30)
   const [isDayUpdated, setIsDayUpdated] = useState(true)
+  const [price, setPrice] = useState()
   
   function updateDay(number) {
     setDays(number);
     setIsDayUpdated(true)
+  }
+
+  function priceCotation() {
+    console.log(coinsGraphicList)
+    /* setPrice(coinsGraphicList.pop()); */
   }
 
   useEffect(() => {
@@ -66,6 +74,7 @@ export default function App() {
 
     getPriceCoinsGraphic(url(days)).then((dataG) => {
       setCoinGraphicList(dataG);
+      setPrice(dataG.pop())
     })
 
     if (isDayUpdated === true) {
@@ -79,7 +88,7 @@ export default function App() {
       backgroundColor="#f50d41"
       barStyle="light-content"
       />
-      <CurrentPrice></CurrentPrice>
+      <CurrentPrice lastCotation={price}></CurrentPrice>
       <HistoryGraphic infoDataGrapigc={coinsGraphicList}></HistoryGraphic>
       <QuotationList filterDay={updateDay} listTransactions={coinsList}></QuotationList>
     </SafeAreaView>
